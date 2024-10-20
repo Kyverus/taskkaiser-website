@@ -1,10 +1,10 @@
 <script setup>
-import { FaRegularMoon, FaRegularSun } from "oh-vue-icons/icons";
-import { BiGithub } from "oh-vue-icons/icons";
-import { addIcons } from "oh-vue-icons";
 import TaskKaiserIcon from "./TaskKaiserIcon.vue";
+import { FaRegularMoon, FaRegularSun } from "oh-vue-icons/icons";
+import { addIcons } from "oh-vue-icons";
+import { RouterLink } from "vue-router";
 
-addIcons(FaRegularMoon, FaRegularSun, BiGithub);
+addIcons(FaRegularMoon, FaRegularSun);
 
 defineProps({
   isDark: Boolean,
@@ -12,75 +12,31 @@ defineProps({
 </script>
 
 <template>
-  <div id="navbar">
-    <div id="nav-content">
-      <div id="nav-brand">
-        <TaskKaiserIcon id="site-logo" />
+  <div
+    id="navbar"
+    class="w-full bg-ct-white-primary dark:bg-ct-black-primary flex top-0 justify-center h-auto"
+  >
+    <div id="nav-content" class="w-[1440px] flex justify-between px-3 py-1">
+      <div class="flex items-center px-5">
+        <RouterLink to="/">
+          <TaskKaiserIcon
+            id="site-logo"
+            class="size-16 text-ct-yellow"
+            iconFill="#ffc75e"
+          />
+        </RouterLink>
       </div>
-
-      <div id="nav-links">
+      <div class="flex items-center px-5 space-x-4">
+        <RouterLink to="/guides">Guides</RouterLink>
         <button @click="$emit('darkmode')">
           <v-icon
             v-if="isDark"
             name="fa-regular-sun"
-            fill="#e7e1d4"
-            class="nav-icon"
+            class="size-8 text-ct-yellow"
           />
-          <v-icon v-else name="fa-regular-moon" class="nav-icon" />
+          <v-icon v-else name="fa-regular-moon" class="size-8 text-ct-yellow" />
         </button>
-        <a>
-          <v-icon name="bi-github" class="nav-icon" />
-        </a>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-button {
-  padding: 0;
-  background-color: transparent;
-  border: none;
-}
-#navbar {
-  display: flex;
-  top: 0;
-  width: 100%;
-  justify-content: center;
-  height: auto;
-}
-
-#nav-content {
-  display: flex;
-  justify-content: space-between;
-  width: 1440px;
-  padding: 5px 10px;
-}
-
-#nav-brand,
-#nav-links {
-  display: flex;
-  align-items: center;
-  padding: 0px 20px;
-}
-
-#site-logo {
-  width: 64px;
-  height: 64px;
-  fill: var(--yellow);
-}
-
-.nav-icon {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-[theme="dark"] .nav-icon {
-  fill: var(--white-primary);
-}
-
-[theme="light"] .nav-icon {
-  fill: var(--black-primary);
-}
-</style>
